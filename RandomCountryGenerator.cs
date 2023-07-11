@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class RandomCountryGenerator : MonoBehaviour
 {
     // make variable public and accessible in unity engine
     public string country;
+    public bool isClicked = false;
+    public Button button;
+
+    public TMP_Text buttonText;
     
     // List of countries to select from
     public List<string> CountriesInTheWorld = new List<string> 
@@ -214,13 +220,53 @@ public class RandomCountryGenerator : MonoBehaviour
     "Zimbabwe"
     };
     
+    // every frame
+    void Update()
+    {
+      // if the button has been clicked
+      if (isClicked == true)
+      {
+        // make the button unclickable and change colour and text
+        if (button != null)
+        {
+          button.interactable = false;
+        }
+        if (buttonText != null)
+        {
+          buttonText.text = "Guess where!";
+          buttonText.color = Color.white;
+          buttonText.fontSize = 18;
+        }
+      }
+      // if it hasn't, or the game has reset
+      else
+      {
+        if (button != null)
+        {
+          // bring the button back
+          button.interactable = true;
+        }
+        if (buttonText != null)
+        {
+          // and change colour and text back to original
+          buttonText.text = "Click to Start";
+          buttonText.color = Color.black;
+          buttonText.fontSize = 18;
+        }
+      } 
+    }
+
     // When the button is clicked
     public void OnButtonPress() {
+      if (isClicked == false)
+      {
       // Choose a random number from 0 to the number of countries in the list
       int randomIndex = UnityEngine.Random.Range(0, CountriesInTheWorld.Count);
       // Find the country with that index value and return it as a string
       country = CountriesInTheWorld[randomIndex];
       // Display the random country in the console.
       Debug.Log(country);
+      }
+      isClicked = true;
     }
 }
