@@ -227,16 +227,11 @@ public class RandomCountryGenerator : MonoBehaviour
       if (isClicked == true)
       {
         // make the button unclickable and change colour and text
-        if (button != null)
-        {
           button.interactable = false;
-        }
-        if (buttonText != null)
-        {
-          buttonText.text = "Guess where!";
+          buttonText.text = "";
           buttonText.color = Color.white;
           buttonText.fontSize = 18;
-        }
+          button.image.color = Color.red;
       }
       // if it hasn't, or the game has reset
       else
@@ -249,7 +244,7 @@ public class RandomCountryGenerator : MonoBehaviour
         if (buttonText != null)
         {
           // and change colour and text back to original
-          buttonText.text = "Click to Start";
+          buttonText.text = "";
           buttonText.color = Color.black;
           buttonText.fontSize = 18;
         }
