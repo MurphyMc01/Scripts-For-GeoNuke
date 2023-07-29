@@ -7,8 +7,11 @@ public class CountryPositionDictionary : MonoBehaviour
     private Vector3 cursorPosition;
     public GameObject cursorObject;
 
-    // make public variable for enter key
-    private bool enterKeyPressed = false;
+    // make public variable for enter keys
+    public bool enterKeyPressed = false;
+
+    // accessible bool for whether the user is correct
+    public bool correctGuess;
 
     // Make a box for the country generator object to be dragged into / accessible in
     public GameObject countryGameObject;
@@ -523,6 +526,9 @@ public class CountryPositionDictionary : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // reset correctGuess
+        correctGuess = false;
+        
         // access the public object of the selected country from the country generator script
         string countryValue = countryGenerator.country;
         string countryValueLowercase = string.Join("", countryValue.Split(' ')).ToLower();
@@ -551,15 +557,20 @@ public class CountryPositionDictionary : MonoBehaviour
                     // Concatenate the country names into a single string
                     string allCountries = string.Join(", ", countries);
 
+                    // If they guess a tile
                     if (enterKeyPressed == true)
                     {
+                        // if they are correct
                         if (countries.Contains(countryValueLowercase))
                         {
-                            Debug.Log("Correct!");
+                            correctGuess = true;
+                            enterKeyPressed = false;
                         }
+                        // if they are not correct
                         else
                         {
-                            Debug.Log("Wrong.");
+                            correctGuess = false;
+                            enterKeyPressed = false;
                         }
                     }
 

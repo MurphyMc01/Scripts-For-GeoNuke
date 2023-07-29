@@ -8,10 +8,13 @@ public class RandomCountryGenerator : MonoBehaviour
 {
     // make variable public and accessible in unity engine
     public string country;
+    public bool nextRound = false;
     public bool isClicked = false;
     public Button button;
-
     public TMP_Text buttonText;
+
+    // Make the GameObject with country generator accessible in multiple functions
+    private CountryPositionDictionary countryDictionary;
     
     // List of countries to select from
     public List<string> CountriesInTheWorld = new List<string> 
@@ -215,34 +218,43 @@ public class RandomCountryGenerator : MonoBehaviour
     "Zimbabwe"
     };
     
+    // at the start of the game
+    void Start()
+    {
+      // Find the GameObject with the country genersator script attached
+      countryDictionary = GameObject.Find("Cursor").GetComponent<CountryPositionDictionary>();
+    }
+    
     // every frame
     void Update()
     {
-      // if the button has been clicked
+      // Access the correctGuess boolean
+      nextRound = countryDictionary.correctGuess;
+      // If they are correct
+      if (nextRound == true)
+      {
+        // Reset the button and user movement
+        isClicked = false;
+      }
+      
       if (isClicked == true)
       {
         // make the button unclickable and change colour and text
-          button.interactable = false;
-          buttonText.text = "";
-          buttonText.color = Color.white;
-          buttonText.fontSize = 18;
-          button.image.color = Color.red;
+        button.interactable = false;
+        buttonText.text = "";
+        buttonText.color = Color.white;
+        buttonText.fontSize = 18;
+        button.image.color = Color.red;
       }
       // if it hasn't, or the game has reset
       else
       {
-        if (button != null)
-        {
           // bring the button back
           button.interactable = true;
-        }
-        if (buttonText != null)
-        {
-          // and change colour and text back to original
           buttonText.text = "";
           buttonText.color = Color.black;
           buttonText.fontSize = 18;
-        }
+          button.image.color = Color.green;
       } 
     }
 
