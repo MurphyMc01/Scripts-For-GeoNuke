@@ -10,6 +10,7 @@ public class RandomCountryGenerator : MonoBehaviour
     public string country;
     public bool nextRound = false;
     public bool isClicked = false;
+    public bool generateCountry = false;
     public Button button;
     public TMP_Text buttonText;
 
@@ -228,6 +229,20 @@ public class RandomCountryGenerator : MonoBehaviour
     // every frame
     void Update()
     {
+      // If the button is clicked (or a new round)
+      if (generateCountry == true) {
+        // Choose a random number from 0 to the number of countries in the list
+        int randomIndex = UnityEngine.Random.Range(0, CountriesInTheWorld.Count);
+        // Find the country with that index value and return it as a string
+        country = CountriesInTheWorld[randomIndex];
+        // Display the random country in the console.
+        Debug.Log(country);
+        // button is clicked
+        isClicked = true;
+        // Dont generate a new country
+        generateCountry = false;
+      }
+
       // Access the correctGuess boolean
       nextRound = countryDictionary.correctGuess;
       // If they are correct
@@ -235,6 +250,8 @@ public class RandomCountryGenerator : MonoBehaviour
       {
         // Reset the button and user movement
         isClicked = false;
+        // Move onto next round
+        generateCountry = true;
       }
       
       if (isClicked == true)
@@ -260,15 +277,6 @@ public class RandomCountryGenerator : MonoBehaviour
 
     // When the button is clicked
     public void OnButtonPress() {
-      if (isClicked == false)
-      {
-      // Choose a random number from 0 to the number of countries in the list
-      int randomIndex = UnityEngine.Random.Range(0, CountriesInTheWorld.Count);
-      // Find the country with that index value and return it as a string
-      country = CountriesInTheWorld[randomIndex];
-      // Display the random country in the console.
-      Debug.Log(country);
-      }
-      isClicked = true;
+      generateCountry = true;
     }
 }

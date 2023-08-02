@@ -528,7 +528,7 @@ public class CountryPositionDictionary : MonoBehaviour
     {
         // reset correctGuess
         correctGuess = false;
-        
+
         // access the public object of the selected country from the country generator script
         string countryValue = countryGenerator.country;
         string countryValueLowercase = string.Join("", countryValue.Split(' ')).ToLower();
