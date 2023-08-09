@@ -32,8 +32,7 @@ public class ScoreTracker : MonoBehaviour
         {
             // Add 1 to score
             score++;
-            // Print it in the console
-            Debug.Log(score);
+            // Print it in text field
             SetscoreBoardText(score);
         }
     }
