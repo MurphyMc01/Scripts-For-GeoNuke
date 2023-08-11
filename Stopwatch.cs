@@ -42,6 +42,7 @@ public class Stopwatch : MonoBehaviour
     void Update()
     {
         isRunning = countryGenerator.isClicked;
+
         if (isRunning)
         {
             // Every 1 seconds, add 1 to seconds

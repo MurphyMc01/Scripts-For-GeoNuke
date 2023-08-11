@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainStrikeTracker : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class MainStrikeTracker : MonoBehaviour
     // Make the GameObject with country generator accessible in multiple functions
     private CountryPositionDictionary countryDictionary;
 
+    FadeInAndOut fade;
+
     // at the start of the game
     void Start()
     {
@@ -38,6 +41,16 @@ public class MainStrikeTracker : MonoBehaviour
 
         // Get the SpriteRenderer component of strikeObject1
         strikeObject3Renderer = strikeObject3.GetComponent<SpriteRenderer>();
+
+        fade = FindObjectOfType<FadeInAndOut>();
+    }
+
+    public IEnumerator ChangeScene()
+    {
+        fade.FadeIn();
+        yield return new WaitForSeconds(0.5f);
+        // Show game over screen
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     // Update is called once per frame
@@ -68,6 +81,8 @@ public class MainStrikeTracker : MonoBehaviour
             strikeObject3Renderer.color = Color.red;
             // Bool for ending game
             gameOver = true;
+            // Change scene (with fade)
+            StartCoroutine(ChangeScene());
         }
     }
 }

@@ -10,6 +10,9 @@ public class CursorMovement : MonoBehaviour
     // Make the GameObject with country generator accessible in multiple functions
     private RandomCountryGenerator countryGenerator;
 
+    // Access gameobject for strikes
+    public GameObject strikeGameObject;
+
     // run at the start of the game
     void Start() 
     {
