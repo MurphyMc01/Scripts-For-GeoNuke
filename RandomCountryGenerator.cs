@@ -10,7 +10,7 @@ public class RandomCountryGenerator : MonoBehaviour
     public string country;
     public bool nextRound = false;
     public bool isClicked = false;
-    public bool generateCountry = false;
+    private bool generateCountry = false;
     public Button button;
     public TMP_Text buttonText;
 

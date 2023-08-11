@@ -41,7 +41,7 @@ public class ScoreTracker : MonoBehaviour
     {
         // string stringScore = score.ToString();
         // change text, color, font size
-        scoreBoard.text = score.ToString();
+        scoreBoard.text = "Score: "+score.ToString();
         scoreBoard.color = Color.white;
     }
 }

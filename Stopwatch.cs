@@ -10,13 +10,23 @@ public class Stopwatch : MonoBehaviour
 
     public void SetTimerText(int minutes, string roundedSeconds)
     {
-        // change text, color
-        timer.text = (minutes+":"+roundedSeconds);
-        timer.color = Color.white;
+        if (minutes <= 99)
+        {
+            // change text, color
+            timer.text = (minutes+":"+roundedSeconds);
+            timer.color = Color.white;
+        }
+        else 
+        {
+            // change text, color
+            timer.text = ("Take a Break!");
+            timer.color = Color.white;
+            timer.fontSize = 0.5f;
+        }
     }
 
     private int minutes = 0;
-    private float seconds = 0;
+    private float seconds = 0f;
     private bool isRunning = false;
     private float roundedSeconds = 0f;
     private RandomCountryGenerator countryGenerator;
@@ -38,7 +48,6 @@ public class Stopwatch : MonoBehaviour
             seconds += Time.deltaTime;
             // Round the float to nearest 1
             roundedSeconds = Mathf.Round(seconds);
-            // Debug.Log(roundedSeconds);
             if (seconds >= 60.0f)
             {
                 minutes++;

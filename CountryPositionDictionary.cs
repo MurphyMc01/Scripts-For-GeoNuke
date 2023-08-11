@@ -13,6 +13,9 @@ public class CountryPositionDictionary : MonoBehaviour
     // accessible bool for whether the user is correct
     public bool correctGuess;
 
+    // accessible bool for whether to add a strike
+    public bool addStrike = false;
+
     // Make a box for the country generator object to be dragged into / accessible in
     public GameObject countryGameObject;
 
@@ -528,6 +531,7 @@ public class CountryPositionDictionary : MonoBehaviour
     {
         // reset correctGuess
         correctGuess = false;
+        addStrike = false;
 
         // access the public object of the selected country from the country generator script
         string countryValue = countryGenerator.country;
@@ -570,6 +574,7 @@ public class CountryPositionDictionary : MonoBehaviour
                         else
                         {
                             correctGuess = false;
+                            addStrike = true;
                             enterKeyPressed = false;
                         }
                     }
