@@ -51,9 +51,6 @@ public class MainStrikeTracker : MonoBehaviour
         strikeObject3Renderer = strikeObject3.GetComponent<SpriteRenderer>();
 
         fade = FindObjectOfType<FadeInAndOut>();
-
-        // Access high score
-        highScore = PlayerPrefs.GetInt ("playerHighScore");
     }
 
     public IEnumerator ChangeScene()
@@ -94,7 +91,7 @@ public class MainStrikeTracker : MonoBehaviour
             gameOver = true;
 
             // here I should store my last score before move to level two
-            PlayerPrefs.SetInt ("player_score", scoreScript.score);
+            PlayerPrefs.SetInt("player_score", scoreScript.score);
 
             // Change scene (with fade)
             StartCoroutine(ChangeScene());

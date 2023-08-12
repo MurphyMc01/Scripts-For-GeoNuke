@@ -253,7 +253,6 @@ public class RandomCountryGenerator : MonoBehaviour
         buttonText.text = "";
         buttonText.color = Color.white;
         buttonText.fontSize = 18;
-        button.image.color = Color.red;
       }
       // if it hasn't, or the game has reset
       else
@@ -263,7 +262,6 @@ public class RandomCountryGenerator : MonoBehaviour
           buttonText.text = "";
           buttonText.color = Color.black;
           buttonText.fontSize = 18;
-          button.image.color = Color.green;
       } 
     }
 
