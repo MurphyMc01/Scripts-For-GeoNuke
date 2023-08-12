@@ -39,7 +39,7 @@ public class CursorMovement : MonoBehaviour
                 }
             }
 
-            if (objectPositionX > -8)
+            if (objectPositionX > -7)
             {
                 if (Input.GetKeyDown("a") || Input.GetKeyDown("left")) {
                     // move 1 down the x axis
@@ -55,7 +55,7 @@ public class CursorMovement : MonoBehaviour
                 }
             }
 
-            if (objectPositionX < 1)
+            if (objectPositionX < 2)
             {
                 if (Input.GetKeyDown("d") || Input.GetKeyDown("right")) {
                     // move 1 up the x axis

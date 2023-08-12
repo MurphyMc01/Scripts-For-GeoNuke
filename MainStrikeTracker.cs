@@ -25,6 +25,11 @@ public class MainStrikeTracker : MonoBehaviour
     // Make the GameObject with country generator accessible in multiple functions
     private CountryPositionDictionary countryDictionary;
 
+    // Access the score script
+    private ScoreTracker scoreScript;
+
+    private int highScore;
+
     FadeInAndOut fade;
 
     // at the start of the game
@@ -32,6 +37,9 @@ public class MainStrikeTracker : MonoBehaviour
     {
         // Find the GameObject with the country genersator script attached
         countryDictionary = GameObject.Find("Cursor").GetComponent<CountryPositionDictionary>();
+
+        // Access the score script
+        scoreScript = GameObject.Find("Score").GetComponent<ScoreTracker>();
 
         // Get the SpriteRenderer component of strikeObject1
         strikeObject1Renderer = strikeObject1.GetComponent<SpriteRenderer>();
@@ -43,6 +51,9 @@ public class MainStrikeTracker : MonoBehaviour
         strikeObject3Renderer = strikeObject3.GetComponent<SpriteRenderer>();
 
         fade = FindObjectOfType<FadeInAndOut>();
+
+        // Access high score
+        highScore = PlayerPrefs.GetInt ("playerHighScore");
     }
 
     public IEnumerator ChangeScene()
@@ -81,6 +92,10 @@ public class MainStrikeTracker : MonoBehaviour
             strikeObject3Renderer.color = Color.red;
             // Bool for ending game
             gameOver = true;
+
+            // here I should store my last score before move to level two
+            PlayerPrefs.SetInt ("player_score", scoreScript.score);
+
             // Change scene (with fade)
             StartCoroutine(ChangeScene());
         }

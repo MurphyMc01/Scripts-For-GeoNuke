@@ -6,7 +6,7 @@ using TMPro;
 public class ScoreTracker : MonoBehaviour
 {
     // Initialize the score (at 0 points)
-    private int score = 0;
+    public int score = 0;
     // Declare bool for whether the user is correct
     private bool increaseScore;
 
