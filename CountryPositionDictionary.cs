@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CountryPositionDictionary : MonoBehaviour
 {
-    private Vector3 cursorPosition;
+    public Vector3 cursorPosition;
     public GameObject cursorObject;
 
     // make public variable for enter keys
