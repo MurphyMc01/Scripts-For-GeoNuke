@@ -8,7 +8,7 @@ public class QuitTheGame : MonoBehaviour
     {
         // Erase high score
         PlayerPrefs.SetInt("playerHighScore", 0);
-        Application.Quit();
+        // Application.Quit();
         Debug.Log("Quit Game");
     }
 }
