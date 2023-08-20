@@ -11,7 +11,12 @@ public class CountryPositionDictionary : MonoBehaviour
     public bool enterKeyPressed = false;
 
     // accessible bool for whether the user is correct
-    public bool correctGuess;
+    public bool continueGame = false;
+    public bool correctGuess = false;
+    public bool incorrectGuess = false;
+
+    // String for dictionary key
+    private string currentRow;
 
     // accessible bool for whether to add a strike
     public bool addStrike = false;
@@ -163,12 +168,12 @@ public class CountryPositionDictionary : MonoBehaviour
 
         // C2
         Vector3 coordinatesC2 = new Vector3(-6.49f, 1.75f, 0.00f);
-        List<string> countriesC2 = new List<string>() { "" };
+        List<string> countriesC2 = new List<string>() { "canada" };
         countryLocationDictionary.Add(coordinatesC2, countriesC2);
 
         // C3
         Vector3 coordinatesC3 = new Vector3(-5.59f, 1.75f, 0.00f);
-        List<string> countriesC3 = new List<string>() { "" };
+        List<string> countriesC3 = new List<string>() { "canada" };
         countryLocationDictionary.Add(coordinatesC3, countriesC3);
 
         // C4
@@ -193,7 +198,7 @@ public class CountryPositionDictionary : MonoBehaviour
 
         // C8
         Vector3 coordinatesC8 = new Vector3(-1.09f, 1.75f, 0.00f);
-        List<string> countriesC8 = new List<string>() { "" };
+        List<string> countriesC8 = new List<string>() { "russia" };
         countryLocationDictionary.Add(coordinatesC8, countriesC8);
 
         // C9
@@ -203,12 +208,12 @@ public class CountryPositionDictionary : MonoBehaviour
 
         // C10
         Vector3 coordinatesC10 = new Vector3(0.71f, 1.75f, 0.00f);
-        List<string> countriesC10 = new List<string>() { "" };
+        List<string> countriesC10 = new List<string>() { "russia" };
         countryLocationDictionary.Add(coordinatesC10, countriesC10);
 
         // C11
         Vector3 coordinatesC11 = new Vector3(1.61f, 1.75f, 0.00f);
-        List<string> countriesC11 = new List<string>() { "" };
+        List<string> countriesC11 = new List<string>() { "russia" };
         countryLocationDictionary.Add(coordinatesC11, countriesC11);
 
         // C12
@@ -223,7 +228,7 @@ public class CountryPositionDictionary : MonoBehaviour
 
         // D2
         Vector3 coordinatesD2 = new Vector3(-6.49f, 0.85f, 0.00f);
-        List<string> countriesD2 = new List<string>() { "" };
+        List<string> countriesD2 = new List<string>() { "canada" };
         countryLocationDictionary.Add(coordinatesD2, countriesD2);
 
         // D3
@@ -233,7 +238,7 @@ public class CountryPositionDictionary : MonoBehaviour
 
         // D4
         Vector3 coordinatesD4 = new Vector3(-4.69f, 0.85f, 0.00f);
-        List<string> countriesD4 = new List<string>() { "" };
+        List<string> countriesD4 = new List<string>() { "camada" };
         countryLocationDictionary.Add(coordinatesD4, countriesD4);
 
         // D5
@@ -248,7 +253,7 @@ public class CountryPositionDictionary : MonoBehaviour
 
         // D7
         Vector3 coordinatesD7 = new Vector3(-1.99f, 0.85f, 0.00f);
-        List<string> countriesD7 = new List<string>() { "austria", "belarus", "czechrepublic", "estonia", "hungary", "latvia", "lithuania", "moldova", "ukraine", "poland", "slovakia", "romania", "slovenia" };
+        List<string> countriesD7 = new List<string>() { "austria", "belarus", "czechrepublic", "estonia", "hungary", "latvia", "lithuania", "moldova", "ukraine", "poland", "slovakia", "romania", "slovenia", "denmark" };
         countryLocationDictionary.Add(coordinatesD7, countriesD7);
 
         // D8
@@ -448,12 +453,12 @@ public class CountryPositionDictionary : MonoBehaviour
 
         // G11
         Vector3 coordinatesG11 = new Vector3(1.61f, -1.85f, 0.00f);
-        List<string> countriesG11 = new List<string>() { "vanuatu" };
+        List<string> countriesG11 = new List<string>() { "vanuatu", "australia" };
         countryLocationDictionary.Add(coordinatesG11, countriesG11);
 
         // G12
         Vector3 coordinatesG12 = new Vector3(2.51f, -1.85f, 0.00f);
-        List<string> countriesG12 = new List<string>() { "fiji", "samoa", "tonga" };
+        List<string> countriesG12 = new List<string>() { "fiji", "samoa", "tonga", "newzealand" };
         countryLocationDictionary.Add(coordinatesG12, countriesG12);
         // Row H
         // H1
@@ -508,14 +513,14 @@ public class CountryPositionDictionary : MonoBehaviour
 
         // H11
         Vector3 coordinatesH11 = new Vector3(1.61f, -2.75f, 0.00f);
-        List<string> countriesH11 = new List<string>() { "" };
+        List<string> countriesH11 = new List<string>() { "newzealand" };
         countryLocationDictionary.Add(coordinatesH11, countriesH11);
 
         // H12
         Vector3 coordinatesH12 = new Vector3(2.51f, -2.75f, 0.00f);
         List<string> countriesH12 = new List<string>() { "newzealand" };
         countryLocationDictionary.Add(coordinatesH12, countriesH12);
-
+     
         // Find the GameObject with the country genersator script attached
         countryGenerator = countryGameObject.GetComponent<RandomCountryGenerator>();
 
@@ -530,8 +535,10 @@ public class CountryPositionDictionary : MonoBehaviour
     void Update()
     {
         // reset correctGuess
-        correctGuess = false;
+        continueGame = false;
         addStrike = false;
+        correctGuess = false;
+        incorrectGuess = false;
 
         // access the public object of the selected country from the country generator script
         string countryValue = countryGenerator.country;
@@ -560,25 +567,26 @@ public class CountryPositionDictionary : MonoBehaviour
 
                     // Concatenate the country names into a single string
                     string allCountries = string.Join(", ", countries);
-
+                    
                     // If they guess a tile
                     if (enterKeyPressed == true)
                     {
                         // if they are correct
                         if (countries.Contains(countryValueLowercase))
                         {
-                            correctGuess = true;
                             enterKeyPressed = false;
+                            correctGuess = true;
                         }
                         // if they are not correct
                         else
                         {
-                            correctGuess = false;
                             addStrike = true;
                             enterKeyPressed = false;
+                            incorrectGuess = true;
                         }
+                        // Coutinue the game regardless of whether user is correct
+                        continueGame = true;
                     }
-
                     // Break the loop since we found a match
                     break;
                 }

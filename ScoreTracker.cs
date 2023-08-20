@@ -10,7 +10,7 @@ public class ScoreTracker : MonoBehaviour
     // Declare bool for whether the user is correct
     private bool increaseScore;
 
-    private RandomCountryGenerator countryGenerator;
+    private CountryPositionDictionary countryDictionary;
 
     // Public which textbox will be changed
     [SerializeField] private TMP_Text scoreBoard;
@@ -19,13 +19,13 @@ public class ScoreTracker : MonoBehaviour
     void Start()
     {
         // Find the GameObject with the country genersator script attached
-        countryGenerator = GameObject.Find("ButtonLoggerObject").GetComponent<RandomCountryGenerator>();
+        countryDictionary = GameObject.Find("Cursor").GetComponent<CountryPositionDictionary>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        increaseScore = countryGenerator.nextRound;
+        increaseScore = countryDictionary.correctGuess;
 
         // If the user gets a country correct
         if (increaseScore == true)

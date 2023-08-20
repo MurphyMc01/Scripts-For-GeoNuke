@@ -232,13 +232,10 @@ public class RandomCountryGenerator : MonoBehaviour
       // If the button is clicked (or a new round)
       if (generateCountry == true) {
         GenerateCountry();
-
       }
 
-      // Access the correctGuess boolean
-      nextRound = countryDictionary.correctGuess;
-      // If they are correct
-      if (nextRound == true)
+      // If they guess (wrong or right)
+      if (countryDictionary.continueGame == true)
       {
         // Reset the button and user movement
         isClicked = false;

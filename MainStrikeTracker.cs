@@ -90,9 +90,6 @@ public class MainStrikeTracker : MonoBehaviour
             // Bool for ending game
             gameOver = true;
 
-            // here I should store my last score before move to level two
-            PlayerPrefs.SetInt("player_score", scoreScript.score);
-
             // Change scene (with fade)
             StartCoroutine(ChangeScene());
         }

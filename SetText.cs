@@ -37,6 +37,5 @@ public class SetText : MonoBehaviour
     {
         // change text, color, font size
         textbox.text = countryValue;
-        textbox.color = Color.white;
     }
 }
