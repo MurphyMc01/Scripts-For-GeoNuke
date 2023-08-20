@@ -90,6 +90,8 @@ public class MainStrikeTracker : MonoBehaviour
             // Bool for ending game
             gameOver = true;
 
+            PlayerPrefs.SetInt("player_score", scoreScript.score);
+
             // Change scene (with fade)
             StartCoroutine(ChangeScene());
         }
